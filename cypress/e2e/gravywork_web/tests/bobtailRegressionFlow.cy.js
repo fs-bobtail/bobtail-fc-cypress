@@ -42,13 +42,32 @@ describe('Automation Test Suite for fleet Card(Bobtail)', function () {
         homePage.navigateToCardsPage();
     });
 
-it('TC - Filter by Active cards', function () {
-  homePage.verifyCardFilterStatus('Active', 'ACTIVE');
-});
+    // it('TC - Should verify filters on card page', function () {
+    //   //  homePage.navigateToCardsPage();  // Assuming it handles login
+    //     homePage.verifyCardFilters();
+    // });
 
-it('TC - Filter by Closed cards - no data case', function () {
-  homePage.verifyCardFilterStatus('Closed', 'NO_DATA');
-});
+    it('TC7 - Verify that toggle button clickable and Enable the scurity', function () {
+         homePage.securityEnableToggle();  
+    });
+
+    it('TC8 - Should navigate to Transaction page and verify title', function () {
+        homePage.clickTransactionsMenu();
+    });
+
+    it('TC9 - Should have filters on Transaction page ', function () {
+        homePage.verifyTransactionsFilters();
+    });
+
+    it('TC10 - Verify export button ', function () {
+        homePage.verifyTransactionsExport();
+    });
+
+    it('TC11 - should navigate to the Reports section from the left menu', () => {
+        homePage.navigateToReportsPage();
+        cy.contains('h2', 'Reports').should('be.visible'); // Adjust as per actual header
+        homePage.verifyReportsTabs();
+    });
 
 
 

@@ -27,21 +27,50 @@ class locators {
 
  
     cardsPage = {
-  menuOption: () => cy.contains('div', 'Cards'),
-  heading: () => cy.get('h2').contains('Cards'),
+        menuOption: () => cy.contains('div', 'Cards'),
+        heading: () => cy.get('h2').contains('Cards'),
+        filterAll: () => cy.get('[data-cy="cardListing-filters-all"]'),
+        filterActive: () => cy.get('[data-cy="cardListing-filters-active"]'),
+        filterInactive: () => cy.get('[data-cy="cardListing-filters-inactive"]'),
+        filterClosed: () => cy.get('[data-cy="cardListing-filters-closed"]'),
+        heading: () => cy.contains('h2', 'Cards'),
+        tableRows: () => cy.get('.card-status'), // example, adjust selector to actual table row status
+        noDataText: () => cy.contains('There is no data for the selected filter'),
+        enabledToggles: () => cy.get('input[type="checkbox"]:not([disabled])'),
+        allToggles: () => cy.get('input[type="checkbox"]'),
+    }
+    cardContainer() {
+        return 'div.d-grid.p-16'; // Parent container for each card
+    }
 
+    cardStatus() {
+        return '[data-cy="cardListing-status"]'; // Status text, like "ACTIVE", for testtttttt
+    }
 
-  filterAll: () => cy.get('[data-cy="cardListing-filters-all"]'),
-  filterActive: () => cy.get('[data-cy="cardListing-filters-active"]'),
-  filterInactive: () => cy.get('[data-cy="cardListing-filters-inactive"]'),
-  filterClosed: () => cy.get('[data-cy="cardListing-filters-closed"]'),
-  heading: () => cy.contains('h2', 'Cards'),
-  tableRows: () => cy.get('.card-status'), // example, adjust selector to actual table row status
-  noDataText: () => cy.contains('There is no data for the selected filter')
+    cardCheckbox() {
+        return 'input.ant-checkbox-input'; // The checkbox inside the cardddd
+    }
 
+    transactionsPage = {
+        transactionsMenuOption: () =>
+        cy.contains('p', 'Transactions').parents('.each-option'),
+        transactionsHeader: () => cy.get('[data-cy="transactionsHeader-heading"]'),
+        cardFilter: () => cy.get('[data-cy="transactionsFilter-Card"] input'),
+        truckFilter: () => cy.get('[data-cy="transactionsFilter-Truck"] input'),
+        driverFilter: () => cy.get('[data-cy="transactionsFilter-Driver"] input'),
+        statusFilter: () => cy.get('[data-cy="transactionsFilter-Status"] input'),
+        dateFilterStart: () => cy.get('.ant-picker-range input[placeholder="Start Date"]'),
+        dateFilterEnd: () => cy.get('.ant-picker-range input[placeholder="End Date"]'),
+        exportButton: () => cy.get('[data-cy="transactionsFilter-exportBtn"]'),
+        exportModalTitle: () => cy.get('.modal-title').contains('Export Transaction'),
+        exportModalButton: () => cy.get('[data-cy="base-primary-button"]'),
+    };
 
-}
-
+    reportsPage = {
+        menuOption: () => cy.contains('div.each-option', 'Reports').should('be.visible'),
+        tabByName: (name) => cy.get('.ant-tabs-tab-btn').contains(name),
+        activeTabContent: () => cy.get('.ant-tabs-tabpane-active'),
+    };
 
 }
 

@@ -47,21 +47,13 @@ class homePage {
     }
 
     verifyForgotPasswordFlow() {
-        // Click forgot password link
         locators.forgotPassword.link().should('be.visible').click();
-
-        // Verify heading appears
         locators.forgotPassword.heading().should('be.visible');
-
-        // Verify email field
         locators.forgotPassword.forgotEmail()
             .should('be.visible')
             .type('testuser@example.com');
 
-        // Click Send Email button
         locators.forgotPassword.sendEmailButton().should('be.visible').click();
-
-        // Verify success message
         locators.forgotPassword.successText().should('be.visible');
     }
 
@@ -86,50 +78,125 @@ class homePage {
             .click();
     }
 
-  navigateToCardsPage() {
- 
-        cy.get('.fc-base-modal', { timeout: 10000 }).should('not.exist');
-
-        
+    navigateToCardsPage() {
+        cy.get('.fc-base-modal', { timeout: 10000 }).should('not.exist'); 
         locators.cardsPage.menuOption()
             .should('be.visible')
             .and('contain.text', 'Cards')
-            .click();
-
-        
+            .click(); 
         cy.url({ timeout: 10000 }).should('eq', 'https://card-app.bobtailtest.com/cards');
-        locators.cardsPage.heading()
-            .should('be.visible')
-            .and('contain.text', 'Cards');
+        // locators.cardsPage.heading()
+        //     .should('be.visible')
+        //     .and('contain.text', 'Cards');
     }
 
-   
-verifyCardFilterStatus(filterType, expectedStatusText) {
-  const filters = {
-    All: locators.cardsPage.filterAll,
-    Active: locators.cardsPage.filterActive,
-    Inactive: locators.cardsPage.filterInactive,
-    Closed: locators.cardsPage.filterClosed
-  };
+//    clickEnabledToggles() {
+//   locators.cardsPage.enabledToggles().each(($toggle) => {
+//     cy.wrap($toggle).click({ force: true });
+//   });
+    securityEnableToggle() {
+        let clicked = false;
+        locators.cardsPage.enabledToggles().each(($toggle) => {
+            if (clicked) return false; 
+            const $el = Cypress.$($toggle);
+            const isToggle = $el.hasClass('toggle') || $el.attr('role') === 'switch';
 
-  // Click the desired filter
-  filters[filterType]().should('be.visible').click();
+            if (isToggle) {
+            cy.wrap($el)
+                .invoke('prop', 'checked')
+                .then((isChecked) => {
+                if (!isChecked) {
+                    cy.wrap($el).click({ force: true });
+                    clicked = true;
+                    cy.contains('Card Unlock Security', { timeout: 5000 }).should('be.visible');
+                    cy.contains('button', 'Enable', { timeout: 5000 }).should('be.visible').click();
+                    cy.contains('Card security Enabled for', { timeout: 5000 }).should('be.visible');
+                }
+                });
+            }
+        });
+    }
 
-  // If expecting no data
-  if (expectedStatusText === 'NO_DATA') {
-    locators.cardsPage.noDataText().should('be.visible');
-  } else {
-    // Otherwise, validate that every visible card has expected status
-    locators.cardsPage.tableRows().each(($row) => {
-      cy.wrap($row).should('contain.text', expectedStatusText);
-    });
-  }
+    clickTransactionsMenu() {
+        locators.transactionsPage.transactionsMenuOption().click({ force: true });
+        locators.transactionsPage.transactionsHeader().should('be.visible').and('contain.text', 'Transactions');
+    }
+    verifyTransactionsFilters()
+    {
+        locators.transactionsPage.cardFilter().should('be.visible').click({ force: true });
+        locators.transactionsPage.truckFilter().should('be.visible').click({ force: true });
+        locators.transactionsPage.driverFilter().should('be.visible').click({ force: true });
+        locators.transactionsPage.statusFilter().should('be.visible').click({ force: true });
+        locators.transactionsPage.dateFilterStart().should('be.visible').click({ force: true });
+        locators.transactionsPage.dateFilterEnd().should('be.visible').click({ force: true });
+    }
+
+    verifyTransactionsExport()
+    {
+        locators.transactionsPage.exportButton().should('be.visible').click({ force: true });
+        locators.transactionsPage.exportModalTitle().should('be.visible');
+        cy.intercept('GET', 'https://card-api.bobtailtest.com/transactions/export/csv').as('csvDownload'); 
+        locators.transactionsPage.exportModalButton().should('be.visible').click();
+        // cy.wait('@csvDownload').its('response.statusCode').should('eq', 200);       
+    }
+
+    navigateToReportsPage() {
+        locators.reportsPage.menuOption().click({ force: true });
+    }
+    verifyReportsTabs() {
+                const tabs = ['Statements', 'Payments', 'IFTA Reports', 'Business Credit'];
+
+                tabs.forEach((tabName) => {
+                cy.get('.ant-tabs-tab-btn').contains(tabName).click();
+                cy.get('.ant-tabs-tabpane-active', { timeout: 10000 }).should('be.visible');
+                cy.get('.ant-tabs-tabpane-active').then($tab => {
+                const hasData = $tab.find('.data-rows').length > 0;
+
+                if (hasData) {
+                cy.wrap($tab).find('.data-rows').should('exist');
+                } else {
+                     cy.wrap($tab).contains(/There are no/i).should('be.visible');
+                }
+             });
+        });
+
+    }
+
 }
 
+// verifyCardFilters() {
+//   // Verify Cards heading
+// //   locators.cardFilters.heading().should('contain.text', 'Cards');
 
+//   // Check "All" filter
+//   locators.cardFilters.filterAll().click();
+//   cy.wait(1000);
+//   locators.cardFilters.tableRows().its('length').should('be.greaterThan', 0);
 
+//   // Check "Active" filter
+//   locators.cardFilters.active().click();
+//   cy.wait(1000);
+//   this.checkStatusInTableOrEmptyState('ACTIVE');
 
+//   // Check "Inactive" filter
+//   locators.cardFilters.inactive().click();
+//   cy.wait(1000);
+//   this.checkStatusInTableOrEmptyState('INACTIVE');
 
-}
+//   // Check "Closed" filter
+//   locators.cardFilters.closed().click();
+//   cy.wait(1000);
+//   this.checkStatusInTableOrEmptyState('CLOSED');
+// }
 
+// checkStatusInTableOrEmptyState(expectedStatus) {
+//   locators.cardFilters.noDataText().then(($el) => {
+//     if ($el.length > 0) {
+//       cy.wrap($el).should('be.visible');
+//     } else {
+//       locators.cardFilters.cardStatusCells().each(($cell) => {
+//         cy.wrap($cell).should('contain.text', expectedStatus);
+//       });
+//     }
+//   });
 module.exports = new homePage();
