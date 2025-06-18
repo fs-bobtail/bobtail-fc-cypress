@@ -3,6 +3,7 @@ node_modules/
 
 # Cypress output
 cypress/videos/
+cypress/.DS_Store
 cypress/screenshots/
 
 # Cypress config cache
