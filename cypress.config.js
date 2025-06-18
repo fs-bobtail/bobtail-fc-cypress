@@ -16,7 +16,7 @@ module.exports = defineConfig({
     reportDir: "C:/Users/Quixel/Desktop/Reports",
   },
   e2e: {
-    testIsolation: false,
+    defaultCommandTimeout: 60000,
     setupNodeEvents(on, config) {
       config.baseUrl = "https://card-app.bobtailtest.com/";
       return config;
