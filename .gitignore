@@ -1,0 +1,33 @@
+# Node modules
+node_modules/
+
+# Cypress output
+cypress/videos/
+cypress/.DS_Store
+cypress/screenshots/
+
+# Cypress config cache
+.cypress-cache/
+.cypress/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Env files
+.env
+.env.*
+
+# Coverage
+coverage/
+
+# Optional: Ignore fixtures if they contain secrets or test credentials
+# cypress/fixtures/credentials.json

@@ -1,34 +1,30 @@
 const { defineConfig } = require("cypress");
 const path = require("path");
 
-
 module.exports = defineConfig({
-  reporter: 'mochawesome',
+  reporter: "mochawesome",
   reporterOptions: {
     charts: true,
     html: false,
     reportFilename: "[status]_[datetime]-[name]-report",
     timestamp: "longDate",
-    reportPageTitle: 'Automation Report',
+    reportPageTitle: "Automation Report",
     embeddedScreenshots: true,
     inlineAssets: false,
     saveAllAttempts: true,
     overwrite: false,
-    reportDir: "C:/Users/Quixel/Desktop/Reports"
+    reportDir: "C:/Users/Quixel/Desktop/Reports",
   },
   e2e: {
     testIsolation: false,
     setupNodeEvents(on, config) {
-
-      config.baseUrl = 'https://card-app.bobtailtest.com/';
+      config.baseUrl = "https://card-app.bobtailtest.com/";
       return config;
-      // const version = config.env.url
-      // const urls = {
-      //   url: "https://mubeen.com/"
-      // }
-      // config.baseUrl = urls[version]
-      // return config
     },
+    chromeWebSecurity: false,
+    experimentalSessionAndOrigin: true,
   },
   video: true,
-})
+  viewportWidth: 1920,
+  viewportHeight: 1080,
+});
