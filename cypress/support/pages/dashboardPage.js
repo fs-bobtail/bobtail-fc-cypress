@@ -7,6 +7,10 @@ class DashboardPage {
   loadsButton = () => cy.get('button[data-cy="products-menu-item-0"]');
   factoringButton = () => cy.get('button[data-cy="products-menu-item-1"]');
   fleetButton = () => cy.get('button[data-cy="products-menu-item-2"]');
+  accountMenuBtn = () => cy.get('div[data-cy="business-menu-trigger"]');
+  accountMenuName = () => cy.get('div[data-cy="business-menu-profile-section"] label').first();
+  accountMenuEmail = () => cy.get('div[data-cy="business-menu-profile-section"] label').last();
+  logoutBtn = () => cy.get('div[data-cy="business-menu-item-0"]');
 
   //methods
   verifyPostLoginUrlAndTitle() {
