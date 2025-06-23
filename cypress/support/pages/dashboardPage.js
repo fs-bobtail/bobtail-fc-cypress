@@ -11,6 +11,7 @@ class DashboardPage {
   accountMenuName = () => cy.get('div[data-cy="business-menu-profile-section"] label').first();
   accountMenuEmail = () => cy.get('div[data-cy="business-menu-profile-section"] label').last();
   logoutBtn = () => cy.get('div[data-cy="business-menu-item-0"]');
+  weeklyCreditLimit = () => cy.get('p[data-cy="cardsBreakDown-remainingLimit"]');
 
   //methods
   verifyPostLoginUrlAndTitle() {
