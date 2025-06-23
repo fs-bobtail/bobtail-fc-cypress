@@ -16,7 +16,7 @@ describe("Dashboard Tests", function () {
     dashboardPage.verifyLoadsaAndFactoringButtonURL();
   });
 
-  it("TC1 - Verify account menu shows correct name and email", function () {
+  it("TC2 - Verify account menu shows correct name and email", function () {
     cy.fixture("testdata.json").then((data) => {
       dashboardPage.accountMenuBtn().contains(data.companyName);
       dashboardPage.accountMenuBtn().click();
@@ -25,4 +25,13 @@ describe("Dashboard Tests", function () {
       dashboardPage.logoutBtn().should('exist');
     });
   });
+
+  it("TC3+4 - Verify account shows correct banners and weekly credit limit", function () {
+    cy.contains("🎉 Great News! Your fleet cards now support non-fuel purchases.");
+    cy.contains("You can now pay for repairs, maintenance, tires, and more! ");
+    cy.contains("🔒 Introducing smart security!");
+    cy.contains("Your card stays locked and unlocks instantly when your driver texts the last 4 digits of the card. ");
+    dashboardPage.weeklyCreditLimit().contains('$2,500.00')
+  });
+
 });
