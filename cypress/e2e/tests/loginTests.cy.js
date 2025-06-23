@@ -4,7 +4,7 @@ import forgotPasswordPage from "../../support/pages/forgotPasswordPage";
 
 describe("Login Tests", function () {
   beforeEach(function () {
-    cy.visit("/logout");
+    cy.visit("/");
     loginPage.verifyLoginFields();
   });
 
