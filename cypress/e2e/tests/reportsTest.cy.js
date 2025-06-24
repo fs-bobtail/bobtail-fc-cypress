@@ -2,7 +2,7 @@ import loginPage from "../../support/pages/loginPage";
 import dashboardPage from "../../support/pages/dashboardPage";
 import ReportsPage from "../../support/pages/reportsPage";
 
-describe("Login Tests", function () {
+describe("Reports Page Test Cases", function () {
 
     before(function () {
       cy.visit("/");
