@@ -8,16 +8,25 @@ describe("Login Tests", function () {
     loginPage.verifyLoginFields();
   });
 
-  it("TC1 - Verify Login with invalid credentials should show error", function () {
+  it("TC1 - Verify URL redirection", function () {
+    loginPage.checkRedirect();
+  });
+
+  it("TC2 - Verify Login fields available", function () {
+    loginPage.verifyLoginFields();
+  });
+
+
+  it("TC3 - Verify Login with invalid credentials should show error", function () {
     loginPage.login("mehreeenhumraz@gmail.com", "abcd12345@");
     cy.contains("Wrong email or password.");
   });
 
-  it("TC1 - Verify forgot password flow works correctly", function () {
+  it("TC4 - Verify forgot password flow works correctly", function () {
     forgotPasswordPage.verifyForgotPasswordFlow();
   });
 
-  it("TC3 - Verify Login with valid credentials works correctly", function () {
+  it("TC5 - Verify Login with valid credentials works correctly", function () {
     loginPage.verifyLoginFields();
     loginPage.checkRedirect();
     cy.fixture("testdata.json").then((creds) => {
