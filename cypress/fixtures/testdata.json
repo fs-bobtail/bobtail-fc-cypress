@@ -2,5 +2,8 @@
   "company": "Bobtail",
   "email": "mubeenbobtail+3@gmail.com",
   "password": "Mubeen@123",
-  "companyName": "Bobtail Testing Mubeen"
+  "companyName": "Bobtail Testing Mubeen",
+  "testEmail": "mhamraz089+automation1@gmail.com",
+  "testPassword": "webdir@!23R",
+  "testCompanyName": "Mehreen Automation 1"
 }
