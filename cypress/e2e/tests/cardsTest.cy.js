@@ -13,21 +13,21 @@ describe("Cards Page Test Cases", function () {
       CardsPage.waitForCardsToLoad();
     });
  
-  // it("TC1 - Should navigate to Cards page and verify title", function () {
-  //     CardsPage.navigateToCardsPage();
-  //   });
+  it("TC1 - Should navigate to Cards page and verify title", function () {
+      CardsPage.navigateToCardsPage();
+    });
   
     // it('TC - Should verify filters on card page', function () {
     //   //  homePage.navigateToCardsPage();  // Assuming it handles login
     //     CardsPage.verifyCardFilters();
     // });
   
-    // it("TC2 - Verify that toggle button clickable and Enable the scurity", function () {
-    //   CardsPage.enableCardSecurity(0);
-    // });
-    // it("TC3 - Disable the card security", function () {
-    //   CardsPage.disableCardSecurity(0);
-    // });
+    it("TC2 - Verify that toggle button clickable and Enable the scurity", function () {
+      CardsPage.enableCardSecurity(0);
+    });
+    it("TC3 - Disable the card security", function () {
+      CardsPage.disableCardSecurity(0);
+    });
     it("TC4 - Enable Non-Fuel Toggle", function () {
       CardsPage.clickFirstNonFuelToggle();
       CardsPage.enableNonFuelLimits();

@@ -117,6 +117,7 @@ class CardsPage {
 }
 
   enableNonFuelLimits() {
+
     cy.get(this.modalContainer(), { timeout: 10000 }).should('be.visible');
     cy.get(this.limitInputs()).eq(0).clear().type('100'); 
     cy.get(this.limitInputs()).eq(1).clear().type('200'); 
