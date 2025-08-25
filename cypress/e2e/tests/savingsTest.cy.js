@@ -1,4 +1,4 @@
-import savingsPage from "../../support/pages/savingsPage.js";
+import savingsPage from "../../support/pages/savingsPage";
 import dashboardPage from "../../support/pages/dashboardPage";
 import loginPage from "../../support/pages/loginPage";
 
