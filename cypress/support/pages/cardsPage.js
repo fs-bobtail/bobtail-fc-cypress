@@ -106,18 +106,18 @@ class CardsPage {
   }
 
   clickFirstNonFuelToggle() {
-      cy.wait(500); 
-      cy.get('.columns-template')
-      .find('.toggle-slider')         
-      .filter((index, el) => {        
-        return index % 2 === 1;     
-      })
-      .each(($toggle) => {
-        // cy.wrap($toggle).click();
-      });
-    }
+  cy.wait(500);
+  cy.get('.columns-template')
+    .find('.toggle-slider')
+    .filter((index) => index % 2 === 1) // Non-Fuel toggles
+    .each(($toggle) => {
+      cy.wrap($toggle).click({ force: true });
+      return false; //////// checking if it breaks after first clck
+    });
+}
 
   enableNonFuelLimits() {
+
     cy.get(this.modalContainer(), { timeout: 10000 }).should('be.visible');
     cy.get(this.limitInputs()).eq(0).clear().type('100'); 
     cy.get(this.limitInputs()).eq(1).clear().type('200'); 
