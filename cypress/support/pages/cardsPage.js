@@ -112,7 +112,7 @@ class CardsPage {
     .filter((index) => index % 2 === 1) // Non-Fuel toggles
     .each(($toggle) => {
       cy.wrap($toggle).click({ force: true });
-      return false; // 👈 breaks after first iteration
+      return false; //////// checking if it breaks after first clck
     });
 }
 
