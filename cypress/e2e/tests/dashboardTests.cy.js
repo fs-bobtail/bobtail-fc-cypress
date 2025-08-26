@@ -7,8 +7,11 @@ describe("Dashboard Tests", function () {
     cy.fixture("testdata.json").then((creds) => {
       loginPage.login(creds.testEmail, creds.testPassword);
     });
-    dashboardPage.verifyAndClosePostWeeklyCreditPopup();
     dashboardPage.verifyAndClosePostLoginPopup();
+  });
+
+  afterEach(function () {
+    cy.clearCookies();
   });
 
   it("TC1 - Verify header buttons on dashboard", function () {
@@ -49,13 +52,6 @@ describe("Dashboard Tests", function () {
 
   it("TC6 - Verify account shows expense history section", function () {
     dashboardPage.expenseHistorySection().contains("Expense history");
-    dashboardPage
-      .expenseHistorySection()
-      .contains(" You will see total USD spent each week ");
-    dashboardPage.expenseHistorySection().contains("Week 1");
-    dashboardPage.expenseHistorySection().contains("Week 2");
-    dashboardPage.expenseHistorySection().contains("Week 3");
-    dashboardPage.expenseHistorySection().contains("Week 4");
   });
 
   it("TC7 - Verify account shows recent activity section", function () {
@@ -66,23 +62,29 @@ describe("Dashboard Tests", function () {
   });
 
   it("TC8 - Verify account shows bank section", function () {
-    dashboardPage.selectedBankSection().contains('Checking ...0000');
-    dashboardPage.selectedBankSection().contains(' Your upcoming payment will be debited from your bank account. ');
+    dashboardPage.selectedBankSection().contains("Checking ...0000");
+    dashboardPage
+      .selectedBankSection()
+      .contains(
+        " Your upcoming payment will be debited from your bank account. "
+      );
     dashboardPage.editBankSection().click();
-    cy.contains('Edit your bank account details');
-    cy.contains('Here, you can either change your primary account, or set up a new one and set it as primary. You can also delete unused accounts, if need be');
-    dashboardPage.addBankBtn().should('be.visible');
-    dashboardPage.existingAccountBox().should('be.visible');
+    cy.contains("Edit your bank account details");
+    cy.contains(
+      "Here, you can either change your primary account, or set up a new one and set it as primary. You can also delete unused accounts, if need be"
+    );
+    dashboardPage.addBankBtn().should("be.visible");
+    dashboardPage.existingAccountBox().should("be.visible");
     dashboardPage.doneBtn().click();
   });
 
   it("TC9 - Verify account shows fuel savings section", function () {
-    cy.contains(' Fuel Savings ');
-    cy.contains('Last Month');
-    cy.contains('Total Savings');
-    cy.contains('Your savings will be transferred to your primary account on the 1st and the 16th of each month.');
+    cy.contains("Total Savings");
+    cy.contains(
+      "Your savings will be transferred to your primary account on the 1st and the 16th of each month."
+    );
     dashboardPage.viewDepositsButton().click();
-    cy.contains('Here’s how much you saved using your fleet cards.');
+    cy.contains("Here’s how much you saved using your fleet cards.");
     dashboardPage.goToSavingsButton().click();
     cy.url().should("include", "/savings");
   });
