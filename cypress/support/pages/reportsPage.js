@@ -13,7 +13,7 @@ class ReportsPage {
 
     tabs.forEach((tabName) => {
       cy.get(".ant-tabs-tab-btn").contains(tabName).click();
-      cy.get(".ant-tabs-tabpane-active", { timeout: 10000 }).should(
+      cy.get(".ant-tabs-tabpane-active").should(
         "be.visible"
       );
       cy.get(".ant-tabs-tabpane-active").then(($tab) => {

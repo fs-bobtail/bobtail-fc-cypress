@@ -21,10 +21,7 @@ module.exports = defineConfig({
       config.baseUrl = "https://card-app.bobtailtest.com/";
       return config;
     },
-    // chromeWebSecurity: false,
-    // experimentalSessionAndOrigin: true,
   },
-  video: true,
   viewportWidth: 1920,
   viewportHeight: 1080,
 });

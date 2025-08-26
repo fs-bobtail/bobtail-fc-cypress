@@ -8,6 +8,10 @@ describe("Login Tests", function () {
     loginPage.verifyLoginFields();
   });
 
+  afterEach(function () {
+    cy.clearCookies();
+  });
+
   it("TC1 - Verify URL redirection", function () {
     loginPage.checkRedirect();
   });
@@ -15,7 +19,6 @@ describe("Login Tests", function () {
   it("TC2 - Verify Login fields available", function () {
     loginPage.verifyLoginFields();
   });
-
 
   it("TC3 - Verify Login with invalid credentials should show error", function () {
     loginPage.login("mehreeenhumraz@gmail.com", "abcd12345@");

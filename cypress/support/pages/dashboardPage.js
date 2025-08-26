@@ -23,10 +23,9 @@ class DashboardPage {
   viewAllTransactions = () => cy.get('div[data-cy="recent-activity-viewAll"]');
   selectedBankSection = () =>
     cy.get('div[data-cy="upcoming-payment-selectedBank"]');
-  editBankSection = () =>
-    cy.get('div[data-cy="upcoming-payment-editBank"]');
-  addBankBtn = () => cy.get('.add-bank-btn');
-  existingAccountBox = () => cy.get('.account-box');
+  editBankSection = () => cy.get('div[data-cy="upcoming-payment-editBank"]');
+  addBankBtn = () => cy.get(".add-bank-btn");
+  existingAccountBox = () => cy.get(".account-box");
   doneBtn = () => cy.get('button[data-cy="bankListing-doneBtn"]');
   viewDepositsButton = () => cy.contains("button", "View Deposits");
   goToSavingsButton = () => cy.contains("button", "Go to savings");
@@ -50,11 +49,8 @@ class DashboardPage {
   }
 
   verifyPostLoginUrlAndTitle() {
-    cy.url({ timeout: 20000 }).should(
-      "eq",
-      "https://card-app.bobtailtest.com/home"
-    );
-    cy.title({ timeout: 20000 }).should("eq", "Bobtail - Fleet Card");
+    cy.url().should("eq", "https://card-app.bobtailtest.com/home");
+    cy.title().should("eq", "Bobtail");
   }
 
   verifyAndClosePostLoginPopup() {

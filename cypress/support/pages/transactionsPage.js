@@ -17,44 +17,32 @@ class TransactionsPage {
   exportModalButton = () => cy.get('[data-cy="base-primary-button"]');
 
   clickTransactionsMenu() {
-      this.transactionsMenuOption().click({ force: true });
-      this.transactionsHeader()
-        .should("be.visible")
-        .and("contain.text", "Transactions");
-    }
-    verifyTransactionsFilters() {
-      this.cardFilter()
-        .should("be.visible")
-        .click({ force: true });
-      this.truckFilter()
-        .should("be.visible")
-        .click({ force: true });
-      this.driverFilter()
-        .should("be.visible")
-        .click({ force: true });
-      this.statusFilter()
-        .should("be.visible")
-        .click({ force: true });
-      this.dateFilterStart()
-        .should("be.visible")
-        .click({ force: true });
-      this.dateFilterEnd()
-        .should("be.visible")
-        .click({ force: true });
-    }
-  
-    verifyTransactionsExport() {
-      this.exportButton()
-        .should("be.visible")
-        .click({ force: true });
-      this.exportModalTitle().should("be.visible");
-      cy.intercept(
-        "GET",
-        "https://card-api.bobtailtest.com/transactions/export/csv"
-      ).as("csvDownload");
-      this.exportModalButton().should("be.visible").click();
-      // cy.wait('@csvDownload').its('response.statusCode').should('eq', 200);
-    }
+    this.transactionsMenuOption().click({ force: true });
+  }
+
+  verifyTransactionsMenu() {
+    this.transactionsHeader()
+      .should("be.visible")
+      .and("contain.text", "Transactions");
+  }
+  verifyTransactionsFilters() {
+    this.cardFilter().should("be.visible").click({ force: true });
+    this.truckFilter().should("be.visible").click({ force: true });
+    this.driverFilter().should("be.visible").click({ force: true });
+    this.statusFilter().should("be.visible").click({ force: true });
+    this.dateFilterStart().should("be.visible").click({ force: true });
+    this.dateFilterEnd().should("be.visible").click({ force: true });
+  }
+
+  verifyTransactionsExport() {
+    this.exportButton().should("be.visible").click({ force: true });
+    this.exportModalTitle().should("be.visible");
+    cy.intercept(
+      "GET",
+      "https://card-api.bobtailtest.com/transactions/export/csv"
+    ).as("csvDownload");
+    this.exportModalButton().should("be.visible").click();
+  }
 }
 
 export default new TransactionsPage();

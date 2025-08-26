@@ -7,14 +7,12 @@ class ForgotPasswordPage {
     cy.contains("We've just sent you an email to reset your password.");
 
   verifyForgotPasswordFlow() {
-    this.link().should('be.visible').click();
-    this.heading().should('be.visible');
-    this.forgotEmail()
-      .should('be.visible')
-      .type('testuser@example.com');
+    this.link().should("be.visible").click();
+    this.heading().should("be.visible");
+    this.forgotEmail().should("be.visible").type("testuser@example.com");
 
-    this.sendEmailButton().should('be.visible').click();
-    this.successText().should('be.visible');
+    this.sendEmailButton().should("be.visible").click();
+    this.successText().should("be.visible");
   }
 }
 
